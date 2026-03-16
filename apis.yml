@@ -1,0 +1,34 @@
+aid: apache-bookkeeper
+name: Apache BookKeeper
+description: >-
+  Apache BookKeeper is a scalable, fault-tolerant, and low-latency storage service optimized for real-time workloads. It provides a simple log-oriented storage abstraction called ledgers that is used by Apache Pulsar and other distributed systems for reliable log storage.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Storage
+  - Distributed Systems
+  - Log Storage
+  - Streaming
+created: '2026-03-16'
+modified: '2026-03-16'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: apache-bookkeeper:apache-bookkeeper
+    name: Apache BookKeeper
+    description: >-
+      BookKeeper provides a Java client API for creating, reading, and managing ledgers (append-only log segments), along with an Admin REST API for cluster management and monitoring.
+    humanURL: https://bookkeeper.apache.org/docs/api/overview
+    tags:
+      - Java
+      - Ledger
+      - Storage
+    properties:
+      - type: Documentation
+        url: https://bookkeeper.apache.org/docs/api/overview
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
