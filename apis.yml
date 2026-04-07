@@ -7,9 +7,9 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Storage
   - Distributed Systems
   - Log Storage
+  - Storage
   - Streaming
 created: '2026-03-16'
 modified: '2026-03-16'
