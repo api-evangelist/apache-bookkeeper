@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-schema/bookkeeper-admin-cluster-info-schema.json",
+  "title": "ClusterInfo",
+  "description": "BookKeeper cluster-wide status and bookie count information.",
+  "type": "object",
+  "properties": {
+    "auditorElected": { "type": "boolean", "description": "Whether an auditor has been elected.", "example": true },
+    "auditorId": { "type": "string", "description": "Socket address of the elected auditor.", "example": "bookie1.example.com:3181" },
+    "clusterUnderReplicated": { "type": "boolean", "description": "Whether any ledgers in the cluster are under-replicated.", "example": false },
+    "ledgerReplicationEnabled": { "type": "boolean", "description": "Whether ledger replication is enabled.", "example": true },
+    "totalBookiesCount": { "type": "integer", "description": "Total number of bookies in the cluster.", "example": 3 },
+    "writableBookiesCount": { "type": "integer", "description": "Number of bookies available for writes.", "example": 3 },
+    "readonlyBookiesCount": { "type": "integer", "description": "Number of read-only bookies.", "example": 0 },
+    "unavailableBookiesCount": { "type": "integer", "description": "Number of unavailable bookies.", "example": 0 }
+  }
+}

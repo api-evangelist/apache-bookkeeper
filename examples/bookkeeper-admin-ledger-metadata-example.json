@@ -1,0 +1,9 @@
+{
+  "ledgerId": 12345,
+  "ensembleSize": 3,
+  "writeQuorumSize": 2,
+  "ackQuorumSize": 2,
+  "state": "CLOSED",
+  "length": 1048576,
+  "lastEntryId": 1024
+}

@@ -1,0 +1,10 @@
+{
+  "auditorElected": true,
+  "auditorId": "bookie1.example.com:3181",
+  "clusterUnderReplicated": false,
+  "ledgerReplicationEnabled": true,
+  "totalBookiesCount": 3,
+  "writableBookiesCount": 3,
+  "readonlyBookiesCount": 0,
+  "unavailableBookiesCount": 0
+}

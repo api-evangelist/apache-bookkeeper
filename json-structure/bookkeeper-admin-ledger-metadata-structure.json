@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-ledger-metadata-structure.json",
+  "title": "LedgerMetadata",
+  "description": "Metadata for a single BookKeeper ledger.",
+  "type": "record",
+  "fields": [
+    { "name": "ledgerId", "type": "long", "description": "Unique identifier of the ledger." },
+    { "name": "ensembleSize", "type": "int", "description": "Number of bookies in the ensemble." },
+    { "name": "writeQuorumSize", "type": "int", "description": "Number of bookies to write to per entry." },
+    { "name": "ackQuorumSize", "type": "int", "description": "Number of acks required before an entry is considered written." },
+    { "name": "state", "type": "string", "description": "State of the ledger (OPEN or CLOSED)." },
+    { "name": "length", "type": "long", "description": "Total byte length of the ledger." },
+    { "name": "lastEntryId", "type": "long", "description": "ID of the last entry in the ledger." }
+  ]
+}

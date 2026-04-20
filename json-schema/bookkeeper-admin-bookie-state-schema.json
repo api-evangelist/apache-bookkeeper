@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-schema/bookkeeper-admin-bookie-state-schema.json",
+  "title": "BookieState",
+  "description": "Current operational state of a BookKeeper bookie.",
+  "type": "object",
+  "properties": {
+    "running": { "type": "boolean", "description": "Whether the bookie is running.", "example": true },
+    "readOnly": { "type": "boolean", "description": "Whether the bookie is in read-only mode.", "example": false },
+    "shuttingDown": { "type": "boolean", "description": "Whether the bookie is shutting down.", "example": false },
+    "availableForHighPriorityWrites": { "type": "boolean", "description": "Whether the bookie accepts high-priority writes.", "example": true }
+  }
+}

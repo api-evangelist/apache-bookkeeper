@@ -1,0 +1,110 @@
+rules:
+  bookkeeper-admin-info-title:
+    description: API info must have a title
+    message: API info.title is required
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+
+  bookkeeper-admin-info-description:
+    description: API info must have a description
+    message: API info.description is required
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+
+  bookkeeper-admin-info-version:
+    description: API info must have a version
+    message: API info.version is required
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  bookkeeper-admin-operation-id:
+    description: All operations must have an operationId
+    message: Operation must have an operationId
+    severity: error
+    given: $.paths[*][get,put,post,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  bookkeeper-admin-operation-summary:
+    description: All operations must have a summary
+    message: Operation must have a summary
+    severity: warn
+    given: $.paths[*][get,put,post,delete,patch]
+    then:
+      field: summary
+      function: truthy
+
+  bookkeeper-admin-operation-tags:
+    description: All operations must have at least one tag
+    message: Operation must have at least one tag
+    severity: warn
+    given: $.paths[*][get,put,post,delete,patch]
+    then:
+      field: tags
+      function: truthy
+
+  bookkeeper-admin-response-200:
+    description: GET and PUT operations should have a 200 response
+    message: GET/PUT operations should define a 200 response
+    severity: warn
+    given: $.paths[*][get,put]
+    then:
+      field: responses.200
+      function: truthy
+
+  bookkeeper-admin-schema-title:
+    description: All component schemas must have a title
+    message: Schema must have a title
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: title
+      function: truthy
+
+  bookkeeper-admin-schema-description:
+    description: All component schemas must have a description
+    message: Schema must have a description
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  bookkeeper-admin-summary-prefix:
+    description: Operation summaries should start with Apache BookKeeper
+    message: Operation summary should begin with "Apache BookKeeper"
+    severity: warn
+    given: $.paths[*][get,put,post,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: ^Apache BookKeeper
+
+  bookkeeper-admin-path-lowercase:
+    description: API paths should use lowercase letters
+    message: API path should be lowercase
+    severity: warn
+    given: $.paths
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[a-z0-9/_{}.-]+$
+
+  bookkeeper-admin-microcks-operation:
+    description: All operations should have x-microcks-operation extension
+    message: Operation should include x-microcks-operation for mock support
+    severity: info
+    given: $.paths[*][get,put,post,delete,patch]
+    then:
+      field: x-microcks-operation
+      function: truthy

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-bookie-info-structure.json",
+  "title": "BookieInfo",
+  "description": "Disk space information for a BookKeeper bookie.",
+  "type": "record",
+  "fields": [
+    { "name": "freeSpace", "type": "long", "description": "Free disk space in bytes." },
+    { "name": "totalSpace", "type": "long", "description": "Total disk space in bytes." }
+  ]
+}

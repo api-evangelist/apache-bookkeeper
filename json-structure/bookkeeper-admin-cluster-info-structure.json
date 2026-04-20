@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-cluster-info-structure.json",
+  "title": "ClusterInfo",
+  "description": "BookKeeper cluster-wide status and bookie count information.",
+  "type": "record",
+  "fields": [
+    { "name": "auditorElected", "type": "boolean", "description": "Whether an auditor has been elected." },
+    { "name": "auditorId", "type": "string", "description": "Socket address of the elected auditor." },
+    { "name": "clusterUnderReplicated", "type": "boolean", "description": "Whether any ledgers in the cluster are under-replicated." },
+    { "name": "ledgerReplicationEnabled", "type": "boolean", "description": "Whether ledger replication is enabled." },
+    { "name": "totalBookiesCount", "type": "int", "description": "Total number of bookies in the cluster." },
+    { "name": "writableBookiesCount", "type": "int", "description": "Number of bookies available for writes." },
+    { "name": "readonlyBookiesCount", "type": "int", "description": "Number of read-only bookies." },
+    { "name": "unavailableBookiesCount", "type": "int", "description": "Number of unavailable bookies." }
+  ]
+}

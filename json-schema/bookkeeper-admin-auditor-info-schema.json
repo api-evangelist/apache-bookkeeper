@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-schema/bookkeeper-admin-auditor-info-schema.json",
+  "title": "AuditorInfo",
+  "description": "Information about the currently elected auditor bookie.",
+  "type": "object",
+  "properties": {
+    "Auditor": { "type": "string", "description": "Hostname and address of the elected auditor.", "example": "bookie1.example.com/192.168.1.1:3181" }
+  }
+}

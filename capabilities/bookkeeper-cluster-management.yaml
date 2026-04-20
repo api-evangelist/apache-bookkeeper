@@ -1,0 +1,52 @@
+naftiko: 1.0.0-alpha1
+info:
+  title: Apache BookKeeper Cluster Management
+  description: >-
+    Workflow capability for managing and monitoring Apache BookKeeper clusters, including
+    bookie health checks, ledger inspection, and auto-recovery operations.
+  version: 4.16.0
+  contact:
+    name: Apache BookKeeper Community
+    url: https://bookkeeper.apache.org/
+
+servers:
+  rest:
+    url: http://localhost:8080
+    port: 8080
+  mcp:
+    port: 9090
+
+tools:
+  - name: check-cluster-health
+    description: Check the health of a BookKeeper cluster by verifying heartbeat, bookie state, and cluster info.
+    operations:
+      - $ref: shared/bookkeeper-admin.yaml#/operations/getHeartbeat
+      - $ref: shared/bookkeeper-admin.yaml#/operations/getBookieState
+      - $ref: shared/bookkeeper-admin.yaml#/operations/getClusterInfo
+
+  - name: inspect-ledgers
+    description: List and inspect ledgers stored on a bookie node.
+    operations:
+      - $ref: shared/bookkeeper-admin.yaml#/operations/listLedgers
+      - $ref: shared/bookkeeper-admin.yaml#/operations/getLedgerMetadata
+
+  - name: monitor-replication
+    description: Monitor under-replication status and identify which bookies hold under-replicated ledgers.
+    operations:
+      - $ref: shared/bookkeeper-admin.yaml#/operations/listUnderReplicatedLedgers
+      - $ref: shared/bookkeeper-admin.yaml#/operations/whoIsAuditor
+
+  - name: trigger-recovery
+    description: Trigger an audit to initiate auto-recovery of under-replicated ledgers.
+    operations:
+      - $ref: shared/bookkeeper-admin.yaml#/operations/triggerAudit
+
+  - name: view-configuration
+    description: Retrieve the current server configuration of a bookie.
+    operations:
+      - $ref: shared/bookkeeper-admin.yaml#/operations/getServerConfig
+
+  - name: view-metrics
+    description: Retrieve Prometheus-format metrics from a bookie node.
+    operations:
+      - $ref: shared/bookkeeper-admin.yaml#/operations/getMetrics

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-gc-status-structure.json",
+  "title": "GcStatus",
+  "description": "Garbage collection status for a bookie.",
+  "type": "record",
+  "fields": [
+    { "name": "is_in_force_gc", "type": "string", "description": "Whether forced garbage collection is currently active." }
+  ]
+}

@@ -1,0 +1,95 @@
+vocabulary:
+  provider: Apache BookKeeper
+  description: >-
+    Domain taxonomy mapping resources, actions, and personas for Apache BookKeeper
+    cluster administration, ledger management, and auto-recovery operations.
+
+  operational:
+    resources:
+      - name: Ledger
+        description: Append-only log of entries managed by a set of bookies in an ensemble.
+        aliases:
+          - LedgerMetadata
+          - LedgerList
+          - LedgerEntries
+      - name: Bookie
+        description: A single BookKeeper storage node that stores ledger entries.
+        aliases:
+          - BookieInfo
+          - BookieList
+          - BookieState
+      - name: Cluster
+        description: The full ensemble of bookies forming a BookKeeper cluster.
+        aliases:
+          - ClusterInfo
+      - name: Auditor
+        description: The elected bookie responsible for detecting under-replication.
+        aliases:
+          - AuditorInfo
+      - name: GarbageCollection
+        description: Process for reclaiming storage from deleted or expired ledgers.
+        aliases:
+          - GcStatus
+      - name: Configuration
+        description: Runtime configuration parameters of a bookie node.
+      - name: Metrics
+        description: Prometheus-format operational metrics exported by a bookie.
+
+    actions:
+      - name: List
+        description: Enumerate ledgers or bookies in the cluster.
+        httpMethods:
+          - GET
+      - name: Get
+        description: Retrieve metadata, state, or info for a resource.
+        httpMethods:
+          - GET
+      - name: Delete
+        description: Remove a ledger from the cluster.
+        httpMethods:
+          - DELETE
+      - name: Trigger
+        description: Initiate an administrative action such as audit or GC.
+        httpMethods:
+          - PUT
+      - name: Decommission
+        description: Safely remove a bookie from the cluster.
+        httpMethods:
+          - PUT
+
+    personas:
+      - name: Cluster Administrator
+        description: Operator responsible for BookKeeper cluster health and configuration.
+      - name: Storage Engineer
+        description: Engineer who manages ledger storage and replication policies.
+
+  capabilities:
+    resources:
+      - name: ClusterHealth
+        description: Composite health status combining heartbeat, bookie state, and cluster info.
+      - name: ReplicationStatus
+        description: Under-replication state across the cluster's ledgers.
+
+    actions:
+      - name: CheckHealth
+        description: Verify bookie availability and cluster replication status.
+      - name: InspectLedgers
+        description: Browse and examine ledger metadata on a bookie.
+      - name: MonitorReplication
+        description: Identify under-replicated ledgers and the current auditor.
+      - name: TriggerRecovery
+        description: Initiate cluster audit to begin auto-recovery of under-replicated ledgers.
+
+    workflows:
+      - name: BookKeeper Cluster Management
+        description: End-to-end workflow for monitoring health, inspecting ledgers, and recovering under-replicated data.
+        capabilities:
+          - check-cluster-health
+          - inspect-ledgers
+          - monitor-replication
+          - trigger-recovery
+
+  crossReference:
+    openapi: openapi/apache-bookkeeper-admin-openapi.yaml
+    naftiko: capabilities/bookkeeper-cluster-management.yaml
+    spectral: rules/apache-bookkeeper-spectral-rules.yml

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-schema/bookkeeper-admin-ledger-metadata-schema.json",
+  "title": "LedgerMetadata",
+  "description": "Metadata for a single BookKeeper ledger.",
+  "type": "object",
+  "properties": {
+    "ledgerId": { "type": "integer", "format": "int64", "description": "Unique identifier of the ledger.", "example": 12345 },
+    "ensembleSize": { "type": "integer", "description": "Number of bookies in the ensemble.", "example": 3 },
+    "writeQuorumSize": { "type": "integer", "description": "Number of bookies to write to per entry.", "example": 2 },
+    "ackQuorumSize": { "type": "integer", "description": "Number of acks required before an entry is considered written.", "example": 2 },
+    "state": { "type": "string", "description": "State of the ledger (OPEN or CLOSED).", "enum": ["OPEN", "CLOSED"], "example": "CLOSED" },
+    "length": { "type": "integer", "format": "int64", "description": "Total byte length of the ledger.", "example": 1048576 },
+    "lastEntryId": { "type": "integer", "format": "int64", "description": "ID of the last entry in the ledger.", "example": 1024 }
+  }
+}

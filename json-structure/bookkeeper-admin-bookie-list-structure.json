@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-bookie-list-structure.json",
+  "title": "BookieList",
+  "description": "Map of bookie socket addresses to hostnames.",
+  "type": "map",
+  "values": { "type": "string" }
+}

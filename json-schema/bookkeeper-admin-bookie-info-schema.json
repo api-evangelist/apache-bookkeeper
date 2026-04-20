@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-schema/bookkeeper-admin-bookie-info-schema.json",
+  "title": "BookieInfo",
+  "description": "Disk space information for a BookKeeper bookie.",
+  "type": "object",
+  "properties": {
+    "freeSpace": { "type": "integer", "format": "int64", "description": "Free disk space in bytes.", "example": 107374182400 },
+    "totalSpace": { "type": "integer", "format": "int64", "description": "Total disk space in bytes.", "example": 214748364800 }
+  }
+}

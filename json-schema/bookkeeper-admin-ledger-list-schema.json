@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-schema/bookkeeper-admin-ledger-list-schema.json",
+  "title": "LedgerList",
+  "description": "Map of ledger IDs to ledger metadata strings.",
+  "type": "object",
+  "additionalProperties": {
+    "type": "string"
+  }
+}

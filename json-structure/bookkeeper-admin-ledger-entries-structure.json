@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-ledger-entries-structure.json",
+  "title": "LedgerEntries",
+  "description": "Map of entry IDs to base64-encoded entry content.",
+  "type": "map",
+  "values": { "type": "string" }
+}

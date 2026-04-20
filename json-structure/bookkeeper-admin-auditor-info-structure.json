@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/json-structure/bookkeeper-admin-auditor-info-structure.json",
+  "title": "AuditorInfo",
+  "description": "Information about the currently elected auditor bookie.",
+  "type": "record",
+  "fields": [
+    { "name": "Auditor", "type": "string", "description": "Hostname and address of the elected auditor." }
+  ]
+}
