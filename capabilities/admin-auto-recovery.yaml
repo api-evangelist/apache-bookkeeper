@@ -1,0 +1,188 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache BookKeeper Admin API — Auto Recovery
+  description: 'Apache BookKeeper Admin API — Auto Recovery. 4 operations. Lead operation: Apache BookKeeper Decommission
+    Bookie. Self-contained Naftiko capability covering one Apache Bookkeeper business surface.'
+  tags:
+  - Apache Bookkeeper
+  - Auto Recovery
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_BOOKKEEPER_API_KEY: APACHE_BOOKKEEPER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-auto-recovery
+    baseUri: http://localhost:8080
+    description: Apache BookKeeper Admin API — Auto Recovery business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-autorecovery-decommission
+      path: /api/v1/autorecovery/decommission
+      operations:
+      - name: decommissionbookie
+        method: PUT
+        description: Apache BookKeeper Decommission Bookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-autorecovery-list_under_replicated_ledger
+      path: /api/v1/autorecovery/list_under_replicated_ledger
+      operations:
+      - name: listunderreplicatedledgers
+        method: GET
+        description: Apache BookKeeper List Under-Replicated Ledgers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: missingreplica
+          in: query
+          type: string
+          description: Filter by bookie address that is missing a replica.
+        - name: excludingmissingreplica
+          in: query
+          type: string
+          description: Exclude ledgers where this bookie is the missing replica.
+    - name: api-v1-autorecovery-trigger_audit
+      path: /api/v1/autorecovery/trigger_audit
+      operations:
+      - name: triggeraudit
+        method: PUT
+        description: Apache BookKeeper Trigger Audit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-autorecovery-who_is_auditor
+      path: /api/v1/autorecovery/who_is_auditor
+      operations:
+      - name: getauditor
+        method: GET
+        description: Apache BookKeeper Get Current Auditor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: admin-auto-recovery-rest
+    port: 8080
+    description: REST adapter for Apache BookKeeper Admin API — Auto Recovery. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/autorecovery/decommission
+      name: api-v1-autorecovery-decommission
+      description: REST surface for api-v1-autorecovery-decommission.
+      operations:
+      - method: PUT
+        name: decommissionbookie
+        description: Apache BookKeeper Decommission Bookie
+        call: admin-auto-recovery.decommissionbookie
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/autorecovery/list-under-replicated-ledger
+      name: api-v1-autorecovery-list-under-replicated-ledger
+      description: REST surface for api-v1-autorecovery-list_under_replicated_ledger.
+      operations:
+      - method: GET
+        name: listunderreplicatedledgers
+        description: Apache BookKeeper List Under-Replicated Ledgers
+        call: admin-auto-recovery.listunderreplicatedledgers
+        with:
+          missingreplica: rest.missingreplica
+          excludingmissingreplica: rest.excludingmissingreplica
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/autorecovery/trigger-audit
+      name: api-v1-autorecovery-trigger-audit
+      description: REST surface for api-v1-autorecovery-trigger_audit.
+      operations:
+      - method: PUT
+        name: triggeraudit
+        description: Apache BookKeeper Trigger Audit
+        call: admin-auto-recovery.triggeraudit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/autorecovery/who-is-auditor
+      name: api-v1-autorecovery-who-is-auditor
+      description: REST surface for api-v1-autorecovery-who_is_auditor.
+      operations:
+      - method: GET
+        name: getauditor
+        description: Apache BookKeeper Get Current Auditor
+        call: admin-auto-recovery.getauditor
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-auto-recovery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache BookKeeper Admin API — Auto Recovery. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apache-bookkeeper-decommission-bookie
+      description: Apache BookKeeper Decommission Bookie
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-auto-recovery.decommissionbookie
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-bookkeeper-list-under-replicated
+      description: Apache BookKeeper List Under-Replicated Ledgers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-auto-recovery.listunderreplicatedledgers
+      with:
+        missingreplica: tools.missingreplica
+        excludingmissingreplica: tools.excludingmissingreplica
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-bookkeeper-trigger-audit
+      description: Apache BookKeeper Trigger Audit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-auto-recovery.triggeraudit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-bookkeeper-get-current-auditor
+      description: Apache BookKeeper Get Current Auditor
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-auto-recovery.getauditor
+      outputParameters:
+      - type: object
+        mapping: $.
