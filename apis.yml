@@ -39,15 +39,15 @@ apis:
     url: openapi/apache-bookkeeper-admin-openapi.yaml
   - type: GettingStarted
     url: https://bookkeeper.apache.org/docs/getting-started/installation
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/admin-auto-recovery.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/admin-bookies.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/admin-configuration.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/admin-ledgers.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/admin-monitoring.yaml
 - aid: apache-bookkeeper:apache-bookkeeper-java-client
   name: Apache BookKeeper Java Client API
