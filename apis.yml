@@ -64,6 +64,10 @@ apis:
   - type: APIReference
     url: https://bookkeeper.apache.org/docs/api/javadoc/
 common:
+- type: VulnerabilityDisclosure
+  url: security/apache-bookkeeper-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/apache-bookkeeper-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/apache
 - type: GitHubRepository
