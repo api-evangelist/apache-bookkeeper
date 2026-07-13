@@ -1,3 +1,17 @@
+# apache-bookkeeper — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - query-params-casing: snake @ 83% (n=12)
+#   - operationid-casing: camel @ 100% (n=19)
+#   - schema-names-casing: pascal @ 100% (n=9)
+#   - schema-properties-casing: camel @ 78% (n=23)
+#   - merge: kept 12 existing, added 5 measured, upgraded 0
+#   - added: query-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   bookkeeper-admin-info-title:
     description: API info must have a title
@@ -7,7 +21,6 @@ rules:
     then:
       field: title
       function: truthy
-
   bookkeeper-admin-info-description:
     description: API info must have a description
     message: API info.description is required
@@ -16,7 +29,6 @@ rules:
     then:
       field: description
       function: truthy
-
   bookkeeper-admin-info-version:
     description: API info must have a version
     message: API info.version is required
@@ -25,7 +37,6 @@ rules:
     then:
       field: version
       function: truthy
-
   bookkeeper-admin-operation-id:
     description: All operations must have an operationId
     message: Operation must have an operationId
@@ -34,7 +45,6 @@ rules:
     then:
       field: operationId
       function: truthy
-
   bookkeeper-admin-operation-summary:
     description: All operations must have a summary
     message: Operation must have a summary
@@ -43,7 +53,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   bookkeeper-admin-operation-tags:
     description: All operations must have at least one tag
     message: Operation must have at least one tag
@@ -52,7 +61,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   bookkeeper-admin-response-200:
     description: GET and PUT operations should have a 200 response
     message: GET/PUT operations should define a 200 response
@@ -61,7 +69,6 @@ rules:
     then:
       field: responses.200
       function: truthy
-
   bookkeeper-admin-schema-title:
     description: All component schemas must have a title
     message: Schema must have a title
@@ -70,7 +77,6 @@ rules:
     then:
       field: title
       function: truthy
-
   bookkeeper-admin-schema-description:
     description: All component schemas must have a description
     message: Schema must have a description
@@ -79,7 +85,6 @@ rules:
     then:
       field: description
       function: truthy
-
   bookkeeper-admin-summary-prefix:
     description: Operation summaries should start with Apache BookKeeper
     message: Operation summary should begin with "Apache BookKeeper"
@@ -89,7 +94,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^Apache BookKeeper
-
   bookkeeper-admin-path-lowercase:
     description: API paths should use lowercase letters
     message: API path should be lowercase
@@ -99,7 +103,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^[a-z0-9/_{}.-]+$
-
   bookkeeper-admin-microcks-operation:
     description: All operations should have x-microcks-operation extension
     message: Operation should include x-microcks-operation for mock support
@@ -107,4 +110,45 @@ rules:
     given: $.paths[*][get,put,post,delete,patch]
     then:
       field: x-microcks-operation
+      function: truthy
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
