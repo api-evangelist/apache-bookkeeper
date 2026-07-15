@@ -64,6 +64,8 @@ apis:
   - type: APIReference
     url: https://bookkeeper.apache.org/docs/api/javadoc/
 common:
+- type: AgenticAccess
+  url: agentic-access/apache-bookkeeper-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/apache-bookkeeper-vulnerability-disclosure.yml
 - type: DomainSecurity
