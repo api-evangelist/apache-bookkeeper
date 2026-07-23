@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Apache BookKeeper Admin Auto Recovery Configuration API
+  description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
+  version: 4.16.0
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Apache BookKeeper Community
+    url: https://bookkeeper.apache.org/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: http://localhost:8080
+  description: Default local BookKeeper bookie HTTP admin endpoint
+tags:
+- name: Configuration
+  description: Server configuration management.
+paths:
+  /api/v1/config/server_config:
+    get:
+      operationId: getServerConfig
+      summary: Apache BookKeeper Get Server Configuration
+      description: Retrieve all overridden server configuration values.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Server configuration values.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+              examples:
+                GetServerConfig200Example:
+                  summary: Default getServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    bookiePort: '3181'
+                    journalDirsNames: /data/journal
+                    ledgerDirNames: /data/ledger
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateServerConfig
+      summary: Apache BookKeeper Update Server Configuration
+      description: Update a server configuration value by name.
+      tags:
+      - Configuration
+      parameters:
+      - name: configName
+        in: query
+        required: true
+        description: Name of the configuration parameter to update.
+        schema:
+          type: string
+          example: minorCompactionThreshold
+      - name: configValue
+        in: query
+        required: true
+        description: New value for the configuration parameter.
+        schema:
+          type: string
+          example: '0.5'
+      responses:
+        '200':
+          description: Configuration updated successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+              examples:
+                UpdateServerConfig200Example:
+                  summary: Default updateServerConfig 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+        '404':
+          description: Configuration key not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

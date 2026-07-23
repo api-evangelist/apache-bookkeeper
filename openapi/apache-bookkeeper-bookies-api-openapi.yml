@@ -1,0 +1,308 @@
+openapi: 3.0.3
+info:
+  title: Apache BookKeeper Admin Auto Recovery Bookies API
+  description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
+  version: 4.16.0
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Apache BookKeeper Community
+    url: https://bookkeeper.apache.org/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: http://localhost:8080
+  description: Default local BookKeeper bookie HTTP admin endpoint
+tags:
+- name: Bookies
+  description: Bookie node management and status operations.
+paths:
+  /api/v1/bookie/info:
+    get:
+      operationId: getBookieInfo
+      summary: Apache BookKeeper Get Bookie Info
+      description: Retrieve disk space information for the current bookie.
+      tags:
+      - Bookies
+      responses:
+        '200':
+          description: Bookie disk space information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookieInfo'
+              examples:
+                GetBookieInfo200Example:
+                  summary: Default getBookieInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    freeSpace: 107374182400
+                    totalSpace: 214748364800
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/list_bookies:
+    get:
+      operationId: listBookies
+      summary: Apache BookKeeper List Bookies
+      description: List all bookies in the cluster filtered by read-write or read-only type.
+      tags:
+      - Bookies
+      parameters:
+      - name: type
+        in: query
+        required: true
+        description: Bookie type filter — "rw" for read-write or "ro" for read-only.
+        schema:
+          type: string
+          enum:
+          - rw
+          - ro
+          example: rw
+      - name: print_hostnames
+        in: query
+        required: false
+        description: If true, include hostname in the response.
+        schema:
+          type: boolean
+          example: true
+      responses:
+        '200':
+          description: Map of bookie socket addresses to hostnames.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookieList'
+              examples:
+                ListBookies200Example:
+                  summary: Default listBookies 200 response
+                  x-microcks-default: true
+                  value:
+                    bookie1.example.com:3181: bookie1.example.com
+                    bookie2.example.com:3181: bookie2.example.com
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/cluster_info:
+    get:
+      operationId: getClusterInfo
+      summary: Apache BookKeeper Get Cluster Info
+      description: Retrieve cluster-wide information including bookie counts, auditor status, and replication state.
+      tags:
+      - Bookies
+      responses:
+        '200':
+          description: Cluster information and bookie statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterInfo'
+              examples:
+                GetClusterInfo200Example:
+                  summary: Default getClusterInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    auditorElected: true
+                    auditorId: bookie1.example.com:3181
+                    clusterUnderReplicated: false
+                    ledgerReplicationEnabled: true
+                    totalBookiesCount: 3
+                    writableBookiesCount: 3
+                    readonlyBookiesCount: 0
+                    unavailableBookiesCount: 0
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/state:
+    get:
+      operationId: getBookieState
+      summary: Apache BookKeeper Get Bookie State
+      description: Retrieve the current operational state of the bookie.
+      tags:
+      - Bookies
+      responses:
+        '200':
+          description: Current bookie state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookieState'
+              examples:
+                GetBookieState200Example:
+                  summary: Default getBookieState 200 response
+                  x-microcks-default: true
+                  value:
+                    running: true
+                    readOnly: false
+                    shuttingDown: false
+                    availableForHighPriorityWrites: true
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/is_ready:
+    get:
+      operationId: isBookieReady
+      summary: Apache BookKeeper Check Bookie Readiness
+      description: Check if the bookie is ready to accept read and write requests.
+      tags:
+      - Bookies
+      responses:
+        '200':
+          description: Bookie is ready.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                IsBookieReady200Example:
+                  summary: Default isBookieReady 200 response
+                  x-microcks-default: true
+                  value: OK
+        '503':
+          description: Bookie is not ready.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/gc:
+    get:
+      operationId: getGcStatus
+      summary: Apache BookKeeper Get Garbage Collection Status
+      description: Check whether forced garbage collection is currently running.
+      tags:
+      - Bookies
+      responses:
+        '200':
+          description: Garbage collection status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcStatus'
+              examples:
+                GetGcStatus200Example:
+                  summary: Default getGcStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    is_in_force_gc: 'false'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: triggerGarbageCollection
+      summary: Apache BookKeeper Trigger Garbage Collection
+      description: Trigger a forced garbage collection cycle on the bookie.
+      tags:
+      - Bookies
+      responses:
+        '200':
+          description: Garbage collection triggered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                TriggerGarbageCollection200Example:
+                  summary: Default triggerGarbageCollection 200 response
+                  x-microcks-default: true
+                  value: OK
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ClusterInfo:
+      title: ClusterInfo
+      description: BookKeeper cluster-wide status and bookie count information.
+      type: object
+      properties:
+        auditorElected:
+          type: boolean
+          description: Whether an auditor has been elected.
+          example: true
+        auditorId:
+          type: string
+          description: Socket address of the elected auditor.
+          example: bookie1.example.com:3181
+        clusterUnderReplicated:
+          type: boolean
+          description: Whether any ledgers in the cluster are under-replicated.
+          example: false
+        ledgerReplicationEnabled:
+          type: boolean
+          description: Whether ledger replication is enabled.
+          example: true
+        totalBookiesCount:
+          type: integer
+          description: Total number of bookies in the cluster.
+          example: 3
+        writableBookiesCount:
+          type: integer
+          description: Number of bookies available for writes.
+          example: 3
+        readonlyBookiesCount:
+          type: integer
+          description: Number of read-only bookies.
+          example: 0
+        unavailableBookiesCount:
+          type: integer
+          description: Number of unavailable bookies.
+          example: 0
+    GcStatus:
+      title: GcStatus
+      description: Garbage collection status for a bookie.
+      type: object
+      properties:
+        is_in_force_gc:
+          type: string
+          description: Whether forced garbage collection is currently active.
+          example: 'false'
+    BookieInfo:
+      title: BookieInfo
+      description: Disk space information for a BookKeeper bookie.
+      type: object
+      properties:
+        freeSpace:
+          type: integer
+          format: int64
+          description: Free disk space in bytes.
+          example: 107374182400
+        totalSpace:
+          type: integer
+          format: int64
+          description: Total disk space in bytes.
+          example: 214748364800
+    BookieList:
+      title: BookieList
+      description: Map of bookie socket addresses to hostnames.
+      type: object
+      additionalProperties:
+        type: string
+    BookieState:
+      title: BookieState
+      description: Current operational state of a BookKeeper bookie.
+      type: object
+      properties:
+        running:
+          type: boolean
+          description: Whether the bookie is running.
+          example: true
+        readOnly:
+          type: boolean
+          description: Whether the bookie is in read-only mode.
+          example: false
+        shuttingDown:
+          type: boolean
+          description: Whether the bookie is shutting down.
+          example: false
+        availableForHighPriorityWrites:
+          type: boolean
+          description: Whether the bookie accepts high-priority writes.
+          example: true

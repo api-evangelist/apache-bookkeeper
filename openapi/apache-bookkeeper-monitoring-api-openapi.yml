@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Apache BookKeeper Admin Auto Recovery Monitoring API
+  description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
+  version: 4.16.0
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Apache BookKeeper Community
+    url: https://bookkeeper.apache.org/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: http://localhost:8080
+  description: Default local BookKeeper bookie HTTP admin endpoint
+tags:
+- name: Monitoring
+  description: Health checks and metrics endpoints.
+paths:
+  /heartbeat:
+    get:
+      operationId: getHeartbeat
+      summary: Apache BookKeeper Get Heartbeat Status
+      description: Get heartbeat status for a specific bookie to verify it is alive and responding.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Bookie is alive and responding.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+              examples:
+                GetHeartbeat200Example:
+                  summary: Default getHeartbeat 200 response
+                  x-microcks-default: true
+                  value: OK
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metrics:
+    get:
+      operationId: getMetrics
+      summary: Apache BookKeeper Get Metrics
+      description: Retrieve all metrics from the BookKeeper stats provider in Prometheus text format.
+      tags:
+      - Monitoring
+      responses:
+        '200':
+          description: Metrics in Prometheus text format.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'bookie_WRITE_BYTES 0.0
+
+                  bookie_READ_BYTES 0.0
+
+                  '
+              examples:
+                GetMetrics200Example:
+                  summary: Default getMetrics 200 response
+                  x-microcks-default: true
+                  value: 'bookie_WRITE_BYTES 0.0
+
+                    bookie_READ_BYTES 0.0
+
+                    '
+        '403':
+          description: Permission denied.
+        '404':
+          description: Not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

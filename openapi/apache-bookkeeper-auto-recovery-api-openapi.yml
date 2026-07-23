@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: Apache BookKeeper Admin Auto Recovery API
+  description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
+  version: 4.16.0
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Apache BookKeeper Community
+    url: https://bookkeeper.apache.org/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: http://localhost:8080
+  description: Default local BookKeeper bookie HTTP admin endpoint
+tags:
+- name: Auto Recovery
+  description: Under-replication detection and bookie recovery operations.
+paths:
+  /api/v1/autorecovery/who_is_auditor:
+    get:
+      operationId: getAuditor
+      summary: Apache BookKeeper Get Current Auditor
+      description: Retrieve information about which bookie is currently elected as the auditor.
+      tags:
+      - Auto Recovery
+      responses:
+        '200':
+          description: Current auditor information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditorInfo'
+              examples:
+                GetAuditor200Example:
+                  summary: Default getAuditor 200 response
+                  x-microcks-default: true
+                  value:
+                    Auditor: bookie1.example.com/192.168.1.1:3181
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/list_under_replicated_ledger:
+    get:
+      operationId: listUnderReplicatedLedgers
+      summary: Apache BookKeeper List Under-Replicated Ledgers
+      description: List ledgers that are under-replicated, optionally filtered by missing bookie address.
+      tags:
+      - Auto Recovery
+      parameters:
+      - name: missingreplica
+        in: query
+        required: false
+        description: Filter by bookie address that is missing a replica.
+        schema:
+          type: string
+          example: bookie1.example.com:3181
+      - name: excludingmissingreplica
+        in: query
+        required: false
+        description: Exclude ledgers where this bookie is the missing replica.
+        schema:
+          type: string
+          example: bookie2.example.com:3181
+      responses:
+        '200':
+          description: List of under-replicated ledger IDs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+              examples:
+                ListUnderReplicatedLedgers200Example:
+                  summary: Default listUnderReplicatedLedgers 200 response
+                  x-microcks-default: true
+                  value:
+                  - 12345
+                  - 67890
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/trigger_audit:
+    put:
+      operationId: triggerAudit
+      summary: Apache BookKeeper Trigger Audit
+      description: Trigger an immediate auditing pass to detect and mark under-replicated ledgers.
+      tags:
+      - Auto Recovery
+      responses:
+        '200':
+          description: Audit triggered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                TriggerAudit200Example:
+                  summary: Default triggerAudit 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/decommission:
+    put:
+      operationId: decommissionBookie
+      summary: Apache BookKeeper Decommission Bookie
+      description: Decommission a bookie by replicating all its ledgers to other bookies and removing it from the cluster.
+      tags:
+      - Auto Recovery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bookie_src
+              properties:
+                bookie_src:
+                  type: string
+                  description: Address of the bookie to decommission.
+                  example: bookie3.example.com:3181
+      responses:
+        '200':
+          description: Decommission initiated successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                DecommissionBookie200Example:
+                  summary: Default decommissionBookie 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AuditorInfo:
+      title: AuditorInfo
+      description: Information about the currently elected auditor bookie.
+      type: object
+      properties:
+        Auditor:
+          type: string
+          description: Hostname and address of the elected auditor.
+          example: bookie1.example.com/192.168.1.1:3181
