@@ -6,9 +6,21 @@ description: Apache BookKeeper is a scalable, fault-tolerant, and low-latency st
   messaging and stream processing systems. It provides a Java client API and an HTTP Admin REST API for cluster management,
   bookie monitoring, and auto-recovery operations.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apache-bookkeeper.png
 tags:
 - Apache
 - Distributed Systems
@@ -21,22 +33,34 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: apache-bookkeeper:apache-bookkeeper-admin-api
-  name: Apache BookKeeper Admin API
-  description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters,
-    bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie
-    health monitoring, and garbage collection management.
+- aid: apache-bookkeeper:apache-bookkeeper-java-client
+  name: Apache BookKeeper Java Client API
+  description: >-
+    The BookKeeper Java client API provides programmatic access for creating, writing, reading, and managing
+    ledgers. It supports both the legacy LedgerHandle API and the newer Ledger API with explicit durability
+    guarantees.
+  humanURL: https://bookkeeper.apache.org/docs/api/ledger-api
+  tags:
+  - Java
+  - Ledger
+  - Storage
+  properties:
+  - type: Documentation
+    url: https://bookkeeper.apache.org/docs/api/ledger-api
+  - type: APIReference
+    url: https://bookkeeper.apache.org/docs/api/javadoc/
+- aid: apache-bookkeeper:apache-bookkeeper-auto-recovery-api
+  name: Apache BookKeeper Auto Recovery API
+  description: Under-replication detection and bookie recovery operations.
   humanURL: https://bookkeeper.apache.org/docs/admin/http
   baseURL: http://localhost:8080
   tags:
-  - Administration
-  - Cluster Management
-  - Monitoring
+  - Auto Recovery
   properties:
+  - type: OpenAPI
+    url: openapi/apache-bookkeeper-auto-recovery-api-openapi.yml
   - type: Documentation
     url: https://bookkeeper.apache.org/docs/admin/http
-  - type: OpenAPI
-    url: openapi/apache-bookkeeper-admin-openapi.yaml
   - type: GettingStarted
     url: https://bookkeeper.apache.org/docs/getting-started/installation
   - type: X-NaftikoCapability
@@ -49,20 +73,102 @@ apis:
     url: capabilities/admin-ledgers.yaml
   - type: X-NaftikoCapability
     url: capabilities/admin-monitoring.yaml
-- aid: apache-bookkeeper:apache-bookkeeper-java-client
-  name: Apache BookKeeper Java Client API
-  description: The BookKeeper Java client API provides programmatic access for creating, writing, reading, and managing ledgers.
-    It supports both the legacy LedgerHandle API and the newer Ledger API with explicit durability guarantees.
-  humanURL: https://bookkeeper.apache.org/docs/api/ledger-api
+- aid: apache-bookkeeper:apache-bookkeeper-bookies-api
+  name: Apache BookKeeper Bookies API
+  description: Bookie node management and status operations.
+  humanURL: https://bookkeeper.apache.org/docs/admin/http
+  baseURL: http://localhost:8080
   tags:
-  - Java
-  - Ledger
-  - Storage
+  - Bookies
   properties:
+  - type: OpenAPI
+    url: openapi/apache-bookkeeper-bookies-api-openapi.yml
   - type: Documentation
-    url: https://bookkeeper.apache.org/docs/api/ledger-api
-  - type: APIReference
-    url: https://bookkeeper.apache.org/docs/api/javadoc/
+    url: https://bookkeeper.apache.org/docs/admin/http
+  - type: GettingStarted
+    url: https://bookkeeper.apache.org/docs/getting-started/installation
+  - type: X-NaftikoCapability
+    url: capabilities/admin-auto-recovery.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-bookies.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-ledgers.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-monitoring.yaml
+- aid: apache-bookkeeper:apache-bookkeeper-configuration-api
+  name: Apache BookKeeper Configuration API
+  description: Server configuration management.
+  humanURL: https://bookkeeper.apache.org/docs/admin/http
+  baseURL: http://localhost:8080
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-bookkeeper-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://bookkeeper.apache.org/docs/admin/http
+  - type: GettingStarted
+    url: https://bookkeeper.apache.org/docs/getting-started/installation
+  - type: X-NaftikoCapability
+    url: capabilities/admin-auto-recovery.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-bookies.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-ledgers.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-monitoring.yaml
+- aid: apache-bookkeeper:apache-bookkeeper-ledgers-api
+  name: Apache BookKeeper Ledgers API
+  description: Ledger management and inspection operations.
+  humanURL: https://bookkeeper.apache.org/docs/admin/http
+  baseURL: http://localhost:8080
+  tags:
+  - Ledgers
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-bookkeeper-ledgers-api-openapi.yml
+  - type: Documentation
+    url: https://bookkeeper.apache.org/docs/admin/http
+  - type: GettingStarted
+    url: https://bookkeeper.apache.org/docs/getting-started/installation
+  - type: X-NaftikoCapability
+    url: capabilities/admin-auto-recovery.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-bookies.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-ledgers.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-monitoring.yaml
+- aid: apache-bookkeeper:apache-bookkeeper-monitoring-api
+  name: Apache BookKeeper Monitoring API
+  description: Health checks and metrics endpoints.
+  humanURL: https://bookkeeper.apache.org/docs/admin/http
+  baseURL: http://localhost:8080
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-bookkeeper-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://bookkeeper.apache.org/docs/admin/http
+  - type: GettingStarted
+    url: https://bookkeeper.apache.org/docs/getting-started/installation
+  - type: X-NaftikoCapability
+    url: capabilities/admin-auto-recovery.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-bookies.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-ledgers.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/admin-monitoring.yaml
 common:
 - type: AgenticAccess
   url: agentic-access/apache-bookkeeper-agentic-access.yml
