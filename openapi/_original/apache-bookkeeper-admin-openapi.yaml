@@ -1,0 +1,793 @@
+openapi: 3.0.3
+info:
+  title: Apache BookKeeper Admin API
+  description: >-
+    The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring
+    BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic
+    cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
+  version: 4.16.0
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Apache BookKeeper Community
+    url: https://bookkeeper.apache.org/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+  - url: http://localhost:8080
+    description: Default local BookKeeper bookie HTTP admin endpoint
+tags:
+  - name: Monitoring
+    description: Health checks and metrics endpoints.
+  - name: Configuration
+    description: Server configuration management.
+  - name: Ledgers
+    description: Ledger management and inspection operations.
+  - name: Bookies
+    description: Bookie node management and status operations.
+  - name: Auto Recovery
+    description: Under-replication detection and bookie recovery operations.
+paths:
+  /heartbeat:
+    get:
+      operationId: getHeartbeat
+      summary: Apache BookKeeper Get Heartbeat Status
+      description: Get heartbeat status for a specific bookie to verify it is alive and responding.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Bookie is alive and responding.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+              examples:
+                GetHeartbeat200Example:
+                  summary: Default getHeartbeat 200 response
+                  x-microcks-default: true
+                  value: OK
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metrics:
+    get:
+      operationId: getMetrics
+      summary: Apache BookKeeper Get Metrics
+      description: Retrieve all metrics from the BookKeeper stats provider in Prometheus text format.
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Metrics in Prometheus text format.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "bookie_WRITE_BYTES 0.0\nbookie_READ_BYTES 0.0\n"
+              examples:
+                GetMetrics200Example:
+                  summary: Default getMetrics 200 response
+                  x-microcks-default: true
+                  value: "bookie_WRITE_BYTES 0.0\nbookie_READ_BYTES 0.0\n"
+        '403':
+          description: Permission denied.
+        '404':
+          description: Not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/config/server_config:
+    get:
+      operationId: getServerConfig
+      summary: Apache BookKeeper Get Server Configuration
+      description: Retrieve all overridden server configuration values.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Server configuration values.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+              examples:
+                GetServerConfig200Example:
+                  summary: Default getServerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    bookiePort: "3181"
+                    journalDirsNames: "/data/journal"
+                    ledgerDirNames: "/data/ledger"
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateServerConfig
+      summary: Apache BookKeeper Update Server Configuration
+      description: Update a server configuration value by name.
+      tags:
+        - Configuration
+      parameters:
+        - name: configName
+          in: query
+          required: true
+          description: Name of the configuration parameter to update.
+          schema:
+            type: string
+            example: minorCompactionThreshold
+        - name: configValue
+          in: query
+          required: true
+          description: New value for the configuration parameter.
+          schema:
+            type: string
+            example: "0.5"
+      responses:
+        '200':
+          description: Configuration updated successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+              examples:
+                UpdateServerConfig200Example:
+                  summary: Default updateServerConfig 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+        '404':
+          description: Configuration key not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/ledger/list:
+    get:
+      operationId: listLedgers
+      summary: Apache BookKeeper List Ledgers
+      description: List all ledgers in the BookKeeper cluster with optional metadata.
+      tags:
+        - Ledgers
+      parameters:
+        - name: print_metadata
+          in: query
+          required: false
+          description: If true, include ledger metadata in the response.
+          schema:
+            type: boolean
+            example: false
+      responses:
+        '200':
+          description: List of ledger IDs with optional metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LedgerList'
+              examples:
+                ListLedgers200Example:
+                  summary: Default listLedgers 200 response
+                  x-microcks-default: true
+                  value:
+                    "1": "LedgerMetadata{ensembleSize: 3, writeQuorumSize: 2, ackQuorumSize: 2}"
+                    "2": "LedgerMetadata{ensembleSize: 3, writeQuorumSize: 2, ackQuorumSize: 2}"
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/ledger/metadata:
+    get:
+      operationId: getLedgerMetadata
+      summary: Apache BookKeeper Get Ledger Metadata
+      description: Retrieve metadata for a specific ledger by its ID.
+      tags:
+        - Ledgers
+      parameters:
+        - name: ledger_id
+          in: query
+          required: true
+          description: The ledger ID (Long) to retrieve metadata for.
+          schema:
+            type: integer
+            format: int64
+            example: 12345
+      responses:
+        '200':
+          description: Ledger metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LedgerMetadata'
+              examples:
+                GetLedgerMetadata200Example:
+                  summary: Default getLedgerMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    ledgerId: 12345
+                    ensembleSize: 3
+                    writeQuorumSize: 2
+                    ackQuorumSize: 2
+                    state: CLOSED
+                    length: 1048576
+                    lastEntryId: 1024
+        '403':
+          description: Permission denied.
+        '404':
+          description: Ledger not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/ledger/delete:
+    delete:
+      operationId: deleteLedger
+      summary: Apache BookKeeper Delete Ledger
+      description: Delete a ledger and all its data from the BookKeeper cluster.
+      tags:
+        - Ledgers
+      parameters:
+        - name: ledger_id
+          in: query
+          required: true
+          description: The ledger ID to delete.
+          schema:
+            type: integer
+            format: int64
+            example: 12345
+      responses:
+        '200':
+          description: Ledger deleted successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                DeleteLedger200Example:
+                  summary: Default deleteLedger 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+        '404':
+          description: Ledger not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/ledger/read:
+    get:
+      operationId: readLedgerEntries
+      summary: Apache BookKeeper Read Ledger Entries
+      description: Read entries from a ledger within a specified entry ID range.
+      tags:
+        - Ledgers
+      parameters:
+        - name: ledger_id
+          in: query
+          required: true
+          description: The ledger ID to read entries from.
+          schema:
+            type: integer
+            format: int64
+            example: 12345
+        - name: start_entry_id
+          in: query
+          required: false
+          description: First entry ID to read (inclusive). Defaults to 0.
+          schema:
+            type: integer
+            format: int64
+            example: 0
+        - name: end_entry_id
+          in: query
+          required: false
+          description: Last entry ID to read (inclusive). Defaults to last entry.
+          schema:
+            type: integer
+            format: int64
+            example: 100
+      responses:
+        '200':
+          description: Ledger entries as a map of entry ID to content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LedgerEntries'
+              examples:
+                ReadLedgerEntries200Example:
+                  summary: Default readLedgerEntries 200 response
+                  x-microcks-default: true
+                  value:
+                    "0": "aGVsbG8gd29ybGQ="
+                    "1": "ZW50cnkgY29udGVudA=="
+        '403':
+          description: Permission denied.
+        '404':
+          description: Ledger not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/info:
+    get:
+      operationId: getBookieInfo
+      summary: Apache BookKeeper Get Bookie Info
+      description: Retrieve disk space information for the current bookie.
+      tags:
+        - Bookies
+      responses:
+        '200':
+          description: Bookie disk space information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookieInfo'
+              examples:
+                GetBookieInfo200Example:
+                  summary: Default getBookieInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    freeSpace: 107374182400
+                    totalSpace: 214748364800
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/list_bookies:
+    get:
+      operationId: listBookies
+      summary: Apache BookKeeper List Bookies
+      description: List all bookies in the cluster filtered by read-write or read-only type.
+      tags:
+        - Bookies
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: Bookie type filter — "rw" for read-write or "ro" for read-only.
+          schema:
+            type: string
+            enum:
+              - rw
+              - ro
+            example: rw
+        - name: print_hostnames
+          in: query
+          required: false
+          description: If true, include hostname in the response.
+          schema:
+            type: boolean
+            example: true
+      responses:
+        '200':
+          description: Map of bookie socket addresses to hostnames.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookieList'
+              examples:
+                ListBookies200Example:
+                  summary: Default listBookies 200 response
+                  x-microcks-default: true
+                  value:
+                    "bookie1.example.com:3181": "bookie1.example.com"
+                    "bookie2.example.com:3181": "bookie2.example.com"
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/cluster_info:
+    get:
+      operationId: getClusterInfo
+      summary: Apache BookKeeper Get Cluster Info
+      description: Retrieve cluster-wide information including bookie counts, auditor status, and replication state.
+      tags:
+        - Bookies
+      responses:
+        '200':
+          description: Cluster information and bookie statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterInfo'
+              examples:
+                GetClusterInfo200Example:
+                  summary: Default getClusterInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    auditorElected: true
+                    auditorId: "bookie1.example.com:3181"
+                    clusterUnderReplicated: false
+                    ledgerReplicationEnabled: true
+                    totalBookiesCount: 3
+                    writableBookiesCount: 3
+                    readonlyBookiesCount: 0
+                    unavailableBookiesCount: 0
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/state:
+    get:
+      operationId: getBookieState
+      summary: Apache BookKeeper Get Bookie State
+      description: Retrieve the current operational state of the bookie.
+      tags:
+        - Bookies
+      responses:
+        '200':
+          description: Current bookie state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookieState'
+              examples:
+                GetBookieState200Example:
+                  summary: Default getBookieState 200 response
+                  x-microcks-default: true
+                  value:
+                    running: true
+                    readOnly: false
+                    shuttingDown: false
+                    availableForHighPriorityWrites: true
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/is_ready:
+    get:
+      operationId: isBookieReady
+      summary: Apache BookKeeper Check Bookie Readiness
+      description: Check if the bookie is ready to accept read and write requests.
+      tags:
+        - Bookies
+      responses:
+        '200':
+          description: Bookie is ready.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                IsBookieReady200Example:
+                  summary: Default isBookieReady 200 response
+                  x-microcks-default: true
+                  value: OK
+        '503':
+          description: Bookie is not ready.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/bookie/gc:
+    get:
+      operationId: getGcStatus
+      summary: Apache BookKeeper Get Garbage Collection Status
+      description: Check whether forced garbage collection is currently running.
+      tags:
+        - Bookies
+      responses:
+        '200':
+          description: Garbage collection status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcStatus'
+              examples:
+                GetGcStatus200Example:
+                  summary: Default getGcStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    is_in_force_gc: "false"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: triggerGarbageCollection
+      summary: Apache BookKeeper Trigger Garbage Collection
+      description: Trigger a forced garbage collection cycle on the bookie.
+      tags:
+        - Bookies
+      responses:
+        '200':
+          description: Garbage collection triggered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                TriggerGarbageCollection200Example:
+                  summary: Default triggerGarbageCollection 200 response
+                  x-microcks-default: true
+                  value: OK
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/who_is_auditor:
+    get:
+      operationId: getAuditor
+      summary: Apache BookKeeper Get Current Auditor
+      description: Retrieve information about which bookie is currently elected as the auditor.
+      tags:
+        - Auto Recovery
+      responses:
+        '200':
+          description: Current auditor information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditorInfo'
+              examples:
+                GetAuditor200Example:
+                  summary: Default getAuditor 200 response
+                  x-microcks-default: true
+                  value:
+                    Auditor: "bookie1.example.com/192.168.1.1:3181"
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/list_under_replicated_ledger:
+    get:
+      operationId: listUnderReplicatedLedgers
+      summary: Apache BookKeeper List Under-Replicated Ledgers
+      description: List ledgers that are under-replicated, optionally filtered by missing bookie address.
+      tags:
+        - Auto Recovery
+      parameters:
+        - name: missingreplica
+          in: query
+          required: false
+          description: Filter by bookie address that is missing a replica.
+          schema:
+            type: string
+            example: "bookie1.example.com:3181"
+        - name: excludingmissingreplica
+          in: query
+          required: false
+          description: Exclude ledgers where this bookie is the missing replica.
+          schema:
+            type: string
+            example: "bookie2.example.com:3181"
+      responses:
+        '200':
+          description: List of under-replicated ledger IDs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+              examples:
+                ListUnderReplicatedLedgers200Example:
+                  summary: Default listUnderReplicatedLedgers 200 response
+                  x-microcks-default: true
+                  value:
+                    - 12345
+                    - 67890
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/trigger_audit:
+    put:
+      operationId: triggerAudit
+      summary: Apache BookKeeper Trigger Audit
+      description: Trigger an immediate auditing pass to detect and mark under-replicated ledgers.
+      tags:
+        - Auto Recovery
+      responses:
+        '200':
+          description: Audit triggered successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                TriggerAudit200Example:
+                  summary: Default triggerAudit 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/autorecovery/decommission:
+    put:
+      operationId: decommissionBookie
+      summary: Apache BookKeeper Decommission Bookie
+      description: Decommission a bookie by replicating all its ledgers to other bookies and removing it from the cluster.
+      tags:
+        - Auto Recovery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - bookie_src
+              properties:
+                bookie_src:
+                  type: string
+                  description: Address of the bookie to decommission.
+                  example: "bookie3.example.com:3181"
+      responses:
+        '200':
+          description: Decommission initiated successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                DecommissionBookie200Example:
+                  summary: Default decommissionBookie 200 response
+                  x-microcks-default: true
+                  value: OK
+        '403':
+          description: Permission denied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LedgerList:
+      title: LedgerList
+      description: Map of ledger IDs to ledger metadata strings.
+      type: object
+      additionalProperties:
+        type: string
+    LedgerMetadata:
+      title: LedgerMetadata
+      description: Metadata for a single BookKeeper ledger.
+      type: object
+      properties:
+        ledgerId:
+          type: integer
+          format: int64
+          description: Unique identifier of the ledger.
+          example: 12345
+        ensembleSize:
+          type: integer
+          description: Number of bookies in the ensemble.
+          example: 3
+        writeQuorumSize:
+          type: integer
+          description: Number of bookies to write to per entry.
+          example: 2
+        ackQuorumSize:
+          type: integer
+          description: Number of acks required before an entry is considered written.
+          example: 2
+        state:
+          type: string
+          description: State of the ledger (OPEN or CLOSED).
+          enum:
+            - OPEN
+            - CLOSED
+          example: CLOSED
+        length:
+          type: integer
+          format: int64
+          description: Total byte length of the ledger.
+          example: 1048576
+        lastEntryId:
+          type: integer
+          format: int64
+          description: ID of the last entry in the ledger.
+          example: 1024
+    LedgerEntries:
+      title: LedgerEntries
+      description: Map of entry IDs to base64-encoded entry content.
+      type: object
+      additionalProperties:
+        type: string
+    BookieInfo:
+      title: BookieInfo
+      description: Disk space information for a BookKeeper bookie.
+      type: object
+      properties:
+        freeSpace:
+          type: integer
+          format: int64
+          description: Free disk space in bytes.
+          example: 107374182400
+        totalSpace:
+          type: integer
+          format: int64
+          description: Total disk space in bytes.
+          example: 214748364800
+    BookieList:
+      title: BookieList
+      description: Map of bookie socket addresses to hostnames.
+      type: object
+      additionalProperties:
+        type: string
+    ClusterInfo:
+      title: ClusterInfo
+      description: BookKeeper cluster-wide status and bookie count information.
+      type: object
+      properties:
+        auditorElected:
+          type: boolean
+          description: Whether an auditor has been elected.
+          example: true
+        auditorId:
+          type: string
+          description: Socket address of the elected auditor.
+          example: "bookie1.example.com:3181"
+        clusterUnderReplicated:
+          type: boolean
+          description: Whether any ledgers in the cluster are under-replicated.
+          example: false
+        ledgerReplicationEnabled:
+          type: boolean
+          description: Whether ledger replication is enabled.
+          example: true
+        totalBookiesCount:
+          type: integer
+          description: Total number of bookies in the cluster.
+          example: 3
+        writableBookiesCount:
+          type: integer
+          description: Number of bookies available for writes.
+          example: 3
+        readonlyBookiesCount:
+          type: integer
+          description: Number of read-only bookies.
+          example: 0
+        unavailableBookiesCount:
+          type: integer
+          description: Number of unavailable bookies.
+          example: 0
+    BookieState:
+      title: BookieState
+      description: Current operational state of a BookKeeper bookie.
+      type: object
+      properties:
+        running:
+          type: boolean
+          description: Whether the bookie is running.
+          example: true
+        readOnly:
+          type: boolean
+          description: Whether the bookie is in read-only mode.
+          example: false
+        shuttingDown:
+          type: boolean
+          description: Whether the bookie is shutting down.
+          example: false
+        availableForHighPriorityWrites:
+          type: boolean
+          description: Whether the bookie accepts high-priority writes.
+          example: true
+    GcStatus:
+      title: GcStatus
+      description: Garbage collection status for a bookie.
+      type: object
+      properties:
+        is_in_force_gc:
+          type: string
+          description: Whether forced garbage collection is currently active.
+          example: "false"
+    AuditorInfo:
+      title: AuditorInfo
+      description: Information about the currently elected auditor bookie.
+      type: object
+      properties:
+        Auditor:
+          type: string
+          description: Hostname and address of the elected auditor.
+          example: "bookie1.example.com/192.168.1.1:3181"

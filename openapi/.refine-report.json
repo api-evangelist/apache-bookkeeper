@@ -1,0 +1,22 @@
+{
+  "provider": "apache-bookkeeper",
+  "sources": [
+    "apache-bookkeeper-auto-recovery-api-openapi.yml",
+    "apache-bookkeeper-bookies-api-openapi.yml",
+    "apache-bookkeeper-configuration-api-openapi.yml",
+    "apache-bookkeeper-ledgers-api-openapi.yml",
+    "apache-bookkeeper-monitoring-api-openapi.yml"
+  ],
+  "outputs": [
+    "apache-bookkeeper-auto-recovery-api-openapi.yml",
+    "apache-bookkeeper-bookies-api-openapi.yml",
+    "apache-bookkeeper-configuration-api-openapi.yml",
+    "apache-bookkeeper-ledgers-api-openapi.yml",
+    "apache-bookkeeper-monitoring-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
