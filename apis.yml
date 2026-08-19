@@ -31,7 +31,7 @@ tags:
 created: '2026-03-16'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/apache-bookkeeper/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: apache-bookkeeper:apache-bookkeeper-java-client
   name: Apache BookKeeper Java Client API
