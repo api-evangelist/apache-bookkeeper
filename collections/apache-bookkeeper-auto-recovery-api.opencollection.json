@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache BookKeeper Admin Auto Recovery API",
+    "version": "4.16.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auto Recovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Current Auditor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/autorecovery/who_is_auditor"
+          },
+          "docs": "Retrieve information about which bookie is currently elected as the auditor."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper List Under-Replicated Ledgers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/autorecovery/list_under_replicated_ledger",
+            "params": [
+              {
+                "name": "missingreplica",
+                "value": "",
+                "type": "query",
+                "description": "Filter by bookie address that is missing a replica."
+              },
+              {
+                "name": "excludingmissingreplica",
+                "value": "",
+                "type": "query",
+                "description": "Exclude ledgers where this bookie is the missing replica."
+              }
+            ]
+          },
+          "docs": "List ledgers that are under-replicated, optionally filtered by missing bookie address."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Trigger Audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/api/v1/autorecovery/trigger_audit"
+          },
+          "docs": "Trigger an immediate auditing pass to detect and mark under-replicated ledgers."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Decommission Bookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/api/v1/autorecovery/decommission",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decommission a bookie by replicating all its ledgers to other bookies and removing it from the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

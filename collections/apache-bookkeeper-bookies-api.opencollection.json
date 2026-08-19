@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache BookKeeper Admin Auto Recovery Bookies API",
+    "version": "4.16.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bookies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Bookie Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/bookie/info"
+          },
+          "docs": "Retrieve disk space information for the current bookie."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper List Bookies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/bookie/list_bookies",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Bookie type filter — \"rw\" for read-write or \"ro\" for read-only."
+              },
+              {
+                "name": "print_hostnames",
+                "value": "",
+                "type": "query",
+                "description": "If true, include hostname in the response."
+              }
+            ]
+          },
+          "docs": "List all bookies in the cluster filtered by read-write or read-only type."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Cluster Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/bookie/cluster_info"
+          },
+          "docs": "Retrieve cluster-wide information including bookie counts, auditor status, and replication state."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Bookie State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/bookie/state"
+          },
+          "docs": "Retrieve the current operational state of the bookie."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Check Bookie Readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/bookie/is_ready"
+          },
+          "docs": "Check if the bookie is ready to accept read and write requests."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Garbage Collection Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/bookie/gc"
+          },
+          "docs": "Check whether forced garbage collection is currently running."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Trigger Garbage Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/api/v1/bookie/gc"
+          },
+          "docs": "Trigger a forced garbage collection cycle on the bookie."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

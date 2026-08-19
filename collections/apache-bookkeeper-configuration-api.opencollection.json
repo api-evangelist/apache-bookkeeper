@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache BookKeeper Admin Auto Recovery Configuration API",
+    "version": "4.16.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/config/server_config"
+          },
+          "docs": "Retrieve all overridden server configuration values."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Update Server Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8080/api/v1/config/server_config",
+            "params": [
+              {
+                "name": "configName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the configuration parameter to update."
+              },
+              {
+                "name": "configValue",
+                "value": "",
+                "type": "query",
+                "description": "New value for the configuration parameter."
+              }
+            ]
+          },
+          "docs": "Update a server configuration value by name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

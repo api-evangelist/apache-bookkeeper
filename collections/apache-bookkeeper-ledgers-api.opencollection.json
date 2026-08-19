@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache BookKeeper Admin Auto Recovery Ledgers API",
+    "version": "4.16.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ledgers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache BookKeeper List Ledgers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/ledger/list",
+            "params": [
+              {
+                "name": "print_metadata",
+                "value": "",
+                "type": "query",
+                "description": "If true, include ledger metadata in the response."
+              }
+            ]
+          },
+          "docs": "List all ledgers in the BookKeeper cluster with optional metadata."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Ledger Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/ledger/metadata",
+            "params": [
+              {
+                "name": "ledger_id",
+                "value": "",
+                "type": "query",
+                "description": "The ledger ID (Long) to retrieve metadata for."
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for a specific ledger by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Delete Ledger",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/api/v1/ledger/delete",
+            "params": [
+              {
+                "name": "ledger_id",
+                "value": "",
+                "type": "query",
+                "description": "The ledger ID to delete."
+              }
+            ]
+          },
+          "docs": "Delete a ledger and all its data from the BookKeeper cluster."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Read Ledger Entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/ledger/read",
+            "params": [
+              {
+                "name": "ledger_id",
+                "value": "",
+                "type": "query",
+                "description": "The ledger ID to read entries from."
+              },
+              {
+                "name": "start_entry_id",
+                "value": "",
+                "type": "query",
+                "description": "First entry ID to read (inclusive). Defaults to 0."
+              },
+              {
+                "name": "end_entry_id",
+                "value": "",
+                "type": "query",
+                "description": "Last entry ID to read (inclusive). Defaults to last entry."
+              }
+            ]
+          },
+          "docs": "Read entries from a ledger within a specified entry ID range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

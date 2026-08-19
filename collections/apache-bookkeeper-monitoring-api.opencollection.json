@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache BookKeeper Admin Auto Recovery Monitoring API",
+    "version": "4.16.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Heartbeat Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/heartbeat"
+          },
+          "docs": "Get heartbeat status for a specific bookie to verify it is alive and responding."
+        },
+        {
+          "info": {
+            "name": "Apache BookKeeper Get Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/metrics"
+          },
+          "docs": "Retrieve all metrics from the BookKeeper stats provider in Prometheus text format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

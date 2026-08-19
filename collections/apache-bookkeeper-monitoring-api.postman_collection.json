@@ -1,0 +1,230 @@
+{
+  "item": [
+    {
+      "id": "24285289-bc13-49a4-ab23-4bbdeb314573",
+      "name": "Monitoring",
+      "description": {
+        "content": "Health checks and metrics endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6390aee5-9e6a-4fb9-a99a-0ce9501c0e61",
+          "name": "Apache BookKeeper Get Heartbeat Status",
+          "request": {
+            "name": "Apache BookKeeper Get Heartbeat Status",
+            "description": {
+              "content": "Get heartbeat status for a specific bookie to verify it is alive and responding.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99653e89-2a35-4c95-9e7e-0bdc518569b3",
+              "name": "Bookie is alive and responding.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "OK",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccfdfe39-38b7-4242-8aaf-b0bf1d1ca4e0",
+          "name": "Apache BookKeeper Get Metrics",
+          "request": {
+            "name": "Apache BookKeeper Get Metrics",
+            "description": {
+              "content": "Retrieve all metrics from the BookKeeper stats provider in Prometheus text format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3ec9894-c71c-4d20-a07a-dfa267fbf014",
+              "name": "Metrics in Prometheus text format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "bookie_WRITE_BYTES 0.0\nbookie_READ_BYTES 0.0\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f917254d-0e6e-409e-a5b2-a88b3cb79e17",
+              "name": "Permission denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be7b82e9-9ba5-4b2b-a424-754f8d8ffffa",
+              "name": "Not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "132ba704-a145-4481-a57e-89de7b308002",
+    "name": "Apache BookKeeper Admin Auto Recovery Monitoring API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.\n\nContact Support:\n Name: Apache BookKeeper Community",
+      "type": "text/plain"
+    }
+  }
+}

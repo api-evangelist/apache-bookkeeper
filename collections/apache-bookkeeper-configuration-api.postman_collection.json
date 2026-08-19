@@ -1,0 +1,320 @@
+{
+  "item": [
+    {
+      "id": "fdb6d11b-ac2b-41d2-a349-b42743a35e76",
+      "name": "Configuration",
+      "description": {
+        "content": "Server configuration management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7604566-0cee-46f5-9c32-96c0e528fdc7",
+          "name": "Apache BookKeeper Get Server Configuration",
+          "request": {
+            "name": "Apache BookKeeper Get Server Configuration",
+            "description": {
+              "content": "Retrieve all overridden server configuration values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "config",
+                "server_config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b77710d4-2880-43ae-a4f4-6b6a2a33e393",
+              "name": "Server configuration values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "config",
+                    "server_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bookiePort\": \"3181\",\n  \"journalDirsNames\": \"/data/journal\",\n  \"ledgerDirNames\": \"/data/ledger\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e692e0d5-7ee9-4289-8648-b061c3d95782",
+              "name": "Permission denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "config",
+                    "server_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0861450d-4567-4829-899d-6f0f169bfefa",
+          "name": "Apache BookKeeper Update Server Configuration",
+          "request": {
+            "name": "Apache BookKeeper Update Server Configuration",
+            "description": {
+              "content": "Update a server configuration value by name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "config",
+                "server_config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "configName",
+                  "value": "<string>",
+                  "description": "(Required) Name of the configuration parameter to update."
+                },
+                {
+                  "disabled": false,
+                  "key": "configValue",
+                  "value": "<string>",
+                  "description": "(Required) New value for the configuration parameter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3e4f251-e321-478b-9b15-e4d58093433e",
+              "name": "Configuration updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "config",
+                    "server_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configName",
+                      "value": "minorCompactionThreshold"
+                    },
+                    {
+                      "key": "configValue",
+                      "value": "0.5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "OK",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e603295-987e-4a6f-b402-ad477377f2e9",
+              "name": "Permission denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "config",
+                    "server_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configName",
+                      "value": "minorCompactionThreshold"
+                    },
+                    {
+                      "key": "configValue",
+                      "value": "0.5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "489b28fe-90b3-4b41-a7f7-aee1afb70bc5",
+              "name": "Configuration key not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "config",
+                    "server_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "configName",
+                      "value": "minorCompactionThreshold"
+                    },
+                    {
+                      "key": "configValue",
+                      "value": "0.5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2edfb7ae-7fa3-47de-ae4e-36c3d01872ac",
+    "name": "Apache BookKeeper Admin Auto Recovery Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.\n\nContact Support:\n Name: Apache BookKeeper Community",
+      "type": "text/plain"
+    }
+  }
+}
