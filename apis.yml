@@ -6,6 +6,20 @@ description: Apache BookKeeper is a scalable, fault-tolerant, and low-latency st
   messaging and stream processing systems. It provides a Java client API and an HTTP Admin REST API for cluster management,
   bookie monitoring, and auto-recovery operations.
 type: Index
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
