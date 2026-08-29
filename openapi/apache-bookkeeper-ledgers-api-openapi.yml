@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Apache BookKeeper Admin Auto Recovery Ledgers API
   description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
@@ -184,6 +184,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    LedgerEntries:
+      title: LedgerEntries
+      description: Map of entry IDs to base64-encoded entry content.
+      type: object
+      additionalProperties:
+        type: string
+    LedgerList:
+      title: LedgerList
+      description: Map of ledger IDs to ledger metadata strings.
+      type: object
+      additionalProperties:
+        type: string
     LedgerMetadata:
       title: LedgerMetadata
       description: Metadata for a single BookKeeper ledger.
@@ -223,15 +235,3 @@ components:
           format: int64
           description: ID of the last entry in the ledger.
           example: 1024
-    LedgerList:
-      title: LedgerList
-      description: Map of ledger IDs to ledger metadata strings.
-      type: object
-      additionalProperties:
-        type: string
-    LedgerEntries:
-      title: LedgerEntries
-      description: Map of entry IDs to base64-encoded entry content.
-      type: object
-      additionalProperties:
-        type: string

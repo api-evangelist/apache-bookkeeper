@@ -17,6 +17,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "apache-bookkeeper-auto-recovery-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apache-bookkeeper-bookies-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apache-bookkeeper-configuration-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apache-bookkeeper-ledgers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apache-bookkeeper-monitoring-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
