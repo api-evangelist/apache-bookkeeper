@@ -141,6 +141,8 @@ apis:
   - type: GettingStarted
     url: https://bookkeeper.apache.org/docs/getting-started/installation
 common:
+- type: Website
+  url: https://www.apache.org/
 - type: IssueTracker
   url: https://github.com/apache/bookkeeper/issues
 - type: CodeOfConduct
