@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Apache BookKeeper Admin Auto Recovery Bookies API
+  title: Apache BookKeeper Admin Bookies API
   description: The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
   version: 4.16.0
   license:
@@ -227,12 +227,48 @@ components:
           type: string
           description: Whether forced garbage collection is currently active.
           example: 'false'
+    BookieState:
+      title: BookieState
+      description: Current operational state of a BookKeeper bookie.
+      type: object
+      properties:
+        running:
+          type: boolean
+          description: Whether the bookie is running.
+          example: true
+        readOnly:
+          type: boolean
+          description: Whether the bookie is in read-only mode.
+          example: false
+        shuttingDown:
+          type: boolean
+          description: Whether the bookie is shutting down.
+          example: false
+        availableForHighPriorityWrites:
+          type: boolean
+          description: Whether the bookie accepts high-priority writes.
+          example: true
     BookieList:
       title: BookieList
       description: Map of bookie socket addresses to hostnames.
       type: object
       additionalProperties:
         type: string
+    BookieInfo:
+      title: BookieInfo
+      description: Disk space information for a BookKeeper bookie.
+      type: object
+      properties:
+        freeSpace:
+          type: integer
+          format: int64
+          description: Free disk space in bytes.
+          example: 107374182400
+        totalSpace:
+          type: integer
+          format: int64
+          description: Total disk space in bytes.
+          example: 214748364800
     ClusterInfo:
       title: ClusterInfo
       description: BookKeeper cluster-wide status and bookie count information.
@@ -270,39 +306,3 @@ components:
           type: integer
           description: Number of unavailable bookies.
           example: 0
-    BookieInfo:
-      title: BookieInfo
-      description: Disk space information for a BookKeeper bookie.
-      type: object
-      properties:
-        freeSpace:
-          type: integer
-          format: int64
-          description: Free disk space in bytes.
-          example: 107374182400
-        totalSpace:
-          type: integer
-          format: int64
-          description: Total disk space in bytes.
-          example: 214748364800
-    BookieState:
-      title: BookieState
-      description: Current operational state of a BookKeeper bookie.
-      type: object
-      properties:
-        running:
-          type: boolean
-          description: Whether the bookie is running.
-          example: true
-        readOnly:
-          type: boolean
-          description: Whether the bookie is in read-only mode.
-          example: false
-        shuttingDown:
-          type: boolean
-          description: Whether the bookie is shutting down.
-          example: false
-        availableForHighPriorityWrites:
-          type: boolean
-          description: Whether the bookie accepts high-priority writes.
-          example: true

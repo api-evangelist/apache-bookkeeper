@@ -1,11 +1,7 @@
 {
   "provider": "apache-bookkeeper",
   "sources": [
-    "apache-bookkeeper-auto-recovery-api-openapi.yml",
-    "apache-bookkeeper-bookies-api-openapi.yml",
-    "apache-bookkeeper-configuration-api-openapi.yml",
-    "apache-bookkeeper-ledgers-api-openapi.yml",
-    "apache-bookkeeper-monitoring-api-openapi.yml"
+    "_ae-authored/apache-bookkeeper-admin-openapi.yaml"
   ],
   "outputs": [
     "apache-bookkeeper-auto-recovery-api-openapi.yml",
@@ -18,12 +14,15 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "apache-bookkeeper-auto-recovery-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apache-bookkeeper-bookies-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apache-bookkeeper-configuration-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apache-bookkeeper-ledgers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apache-bookkeeper-monitoring-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apache-bookkeeper-admin-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "apache-bookkeeper-auto-recovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-bookkeeper-bookies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-bookkeeper-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-bookkeeper-ledgers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apache-bookkeeper-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
