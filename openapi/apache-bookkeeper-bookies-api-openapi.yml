@@ -218,57 +218,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GcStatus:
-      title: GcStatus
-      description: Garbage collection status for a bookie.
-      type: object
-      properties:
-        is_in_force_gc:
-          type: string
-          description: Whether forced garbage collection is currently active.
-          example: 'false'
-    BookieState:
-      title: BookieState
-      description: Current operational state of a BookKeeper bookie.
-      type: object
-      properties:
-        running:
-          type: boolean
-          description: Whether the bookie is running.
-          example: true
-        readOnly:
-          type: boolean
-          description: Whether the bookie is in read-only mode.
-          example: false
-        shuttingDown:
-          type: boolean
-          description: Whether the bookie is shutting down.
-          example: false
-        availableForHighPriorityWrites:
-          type: boolean
-          description: Whether the bookie accepts high-priority writes.
-          example: true
     BookieList:
       title: BookieList
       description: Map of bookie socket addresses to hostnames.
       type: object
       additionalProperties:
         type: string
-    BookieInfo:
-      title: BookieInfo
-      description: Disk space information for a BookKeeper bookie.
-      type: object
-      properties:
-        freeSpace:
-          type: integer
-          format: int64
-          description: Free disk space in bytes.
-          example: 107374182400
-        totalSpace:
-          type: integer
-          format: int64
-          description: Total disk space in bytes.
-          example: 214748364800
     ClusterInfo:
       title: ClusterInfo
       description: BookKeeper cluster-wide status and bookie count information.
@@ -306,3 +261,48 @@ components:
           type: integer
           description: Number of unavailable bookies.
           example: 0
+    GcStatus:
+      title: GcStatus
+      description: Garbage collection status for a bookie.
+      type: object
+      properties:
+        is_in_force_gc:
+          type: string
+          description: Whether forced garbage collection is currently active.
+          example: 'false'
+    BookieInfo:
+      title: BookieInfo
+      description: Disk space information for a BookKeeper bookie.
+      type: object
+      properties:
+        freeSpace:
+          type: integer
+          format: int64
+          description: Free disk space in bytes.
+          example: 107374182400
+        totalSpace:
+          type: integer
+          format: int64
+          description: Total disk space in bytes.
+          example: 214748364800
+    BookieState:
+      title: BookieState
+      description: Current operational state of a BookKeeper bookie.
+      type: object
+      properties:
+        running:
+          type: boolean
+          description: Whether the bookie is running.
+          example: true
+        readOnly:
+          type: boolean
+          description: Whether the bookie is in read-only mode.
+          example: false
+        shuttingDown:
+          type: boolean
+          description: Whether the bookie is shutting down.
+          example: false
+        availableForHighPriorityWrites:
+          type: boolean
+          description: Whether the bookie accepts high-priority writes.
+          example: true
