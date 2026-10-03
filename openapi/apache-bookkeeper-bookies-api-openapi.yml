@@ -218,49 +218,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    BookieList:
-      title: BookieList
-      description: Map of bookie socket addresses to hostnames.
-      type: object
-      additionalProperties:
-        type: string
-    ClusterInfo:
-      title: ClusterInfo
-      description: BookKeeper cluster-wide status and bookie count information.
-      type: object
-      properties:
-        auditorElected:
-          type: boolean
-          description: Whether an auditor has been elected.
-          example: true
-        auditorId:
-          type: string
-          description: Socket address of the elected auditor.
-          example: bookie1.example.com:3181
-        clusterUnderReplicated:
-          type: boolean
-          description: Whether any ledgers in the cluster are under-replicated.
-          example: false
-        ledgerReplicationEnabled:
-          type: boolean
-          description: Whether ledger replication is enabled.
-          example: true
-        totalBookiesCount:
-          type: integer
-          description: Total number of bookies in the cluster.
-          example: 3
-        writableBookiesCount:
-          type: integer
-          description: Number of bookies available for writes.
-          example: 3
-        readonlyBookiesCount:
-          type: integer
-          description: Number of read-only bookies.
-          example: 0
-        unavailableBookiesCount:
-          type: integer
-          description: Number of unavailable bookies.
-          example: 0
     GcStatus:
       title: GcStatus
       description: Garbage collection status for a bookie.
@@ -306,3 +263,46 @@ components:
           type: boolean
           description: Whether the bookie accepts high-priority writes.
           example: true
+    ClusterInfo:
+      title: ClusterInfo
+      description: BookKeeper cluster-wide status and bookie count information.
+      type: object
+      properties:
+        auditorElected:
+          type: boolean
+          description: Whether an auditor has been elected.
+          example: true
+        auditorId:
+          type: string
+          description: Socket address of the elected auditor.
+          example: bookie1.example.com:3181
+        clusterUnderReplicated:
+          type: boolean
+          description: Whether any ledgers in the cluster are under-replicated.
+          example: false
+        ledgerReplicationEnabled:
+          type: boolean
+          description: Whether ledger replication is enabled.
+          example: true
+        totalBookiesCount:
+          type: integer
+          description: Total number of bookies in the cluster.
+          example: 3
+        writableBookiesCount:
+          type: integer
+          description: Number of bookies available for writes.
+          example: 3
+        readonlyBookiesCount:
+          type: integer
+          description: Number of read-only bookies.
+          example: 0
+        unavailableBookiesCount:
+          type: integer
+          description: Number of unavailable bookies.
+          example: 0
+    BookieList:
+      title: BookieList
+      description: Map of bookie socket addresses to hostnames.
+      type: object
+      additionalProperties:
+        type: string
