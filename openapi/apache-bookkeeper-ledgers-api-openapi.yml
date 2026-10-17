@@ -190,12 +190,6 @@ components:
       type: object
       additionalProperties:
         type: string
-    LedgerList:
-      title: LedgerList
-      description: Map of ledger IDs to ledger metadata strings.
-      type: object
-      additionalProperties:
-        type: string
     LedgerMetadata:
       title: LedgerMetadata
       description: Metadata for a single BookKeeper ledger.
@@ -235,3 +229,9 @@ components:
           format: int64
           description: ID of the last entry in the ledger.
           example: 1024
+    LedgerList:
+      title: LedgerList
+      description: Map of ledger IDs to ledger metadata strings.
+      type: object
+      additionalProperties:
+        type: string
