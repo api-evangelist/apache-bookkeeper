@@ -1,9 +1,12 @@
 {
   "provider": "apache-bookkeeper",
   "sources": [
+    "_original/apache-bookkeeper-openapi.json",
     "_ae-authored/apache-bookkeeper-admin-openapi.yaml"
   ],
   "outputs": [
+    "apache-bookkeeper-queues-api-openapi.yml",
+    "apache-bookkeeper-status-api-openapi.yml",
     "apache-bookkeeper-auto-recovery-api-openapi.yml",
     "apache-bookkeeper-bookies-api-openapi.yml",
     "apache-bookkeeper-configuration-api-openapi.yml",
@@ -14,9 +17,10 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apache-bookkeeper-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "apache-bookkeeper-admin-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+2 apis, 8 total)"
   ],
   "skipped": [
     "apache-bookkeeper-auto-recovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
