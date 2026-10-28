@@ -1,4 +1,4 @@
-# Apache BookKeeper (apache-bookkeeper)
+# Apache BookKeeper
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,133 +66,184 @@
 
 Apache BookKeeper is a scalable, fault-tolerant, and low-latency storage service optimized for real-time workloads developed by the Apache Software Foundation. It provides a simple log-oriented storage abstraction called ledgers for reliable, replicated storage of sequential data. BookKeeper is used as the durable log storage layer in Apache Pulsar and other distributed messaging and stream processing systems. It provides a Java client API and an HTTP Admin REST API for cluster management, bookie monitoring, and auto-recovery operations.
 
-**URL:** [https://bookkeeper.apache.org/](https://bookkeeper.apache.org/)
+**Areas:** Apache · Distributed Systems · Log Storage · Open Source · Storage · Streaming
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Apache BookKeeper on APIs.io
 
-## Tags
+Everything profiled for Apache BookKeeper is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/apache-bookkeeper/](https://apis.io/providers/apache-bookkeeper/)** — or go straight to one of the APIs or properties below.
 
- - Apache, Distributed Systems, Log Storage, Open Source, Storage, Streaming
+### APIs (6)
 
-## Timestamps
+- [Apache BookKeeper Java Client API](https://apis.io/apis/apache-bookkeeper/apache-bookkeeper-java-client/) — The BookKeeper Java client API provides programmatic access for creating, writing, reading, and managing ledgers. It supports both the legacy LedgerHandle…
+- [Apache BookKeeper Auto Recovery API](https://apis.io/apis/apache-bookkeeper/apache-bookkeeper-auto-recovery-api/) — Under-replication detection and bookie recovery operations.
+- [Apache BookKeeper Bookies API](https://apis.io/apis/apache-bookkeeper/apache-bookkeeper-bookies-api/) — Bookie node management and status operations.
+- [Apache BookKeeper Configuration API](https://apis.io/apis/apache-bookkeeper/apache-bookkeeper-configuration-api/) — Server configuration management.
+- [Apache BookKeeper Ledgers API](https://apis.io/apis/apache-bookkeeper/apache-bookkeeper-ledgers-api/) — Ledger management and inspection operations.
+- [Apache BookKeeper Monitoring API](https://apis.io/apis/apache-bookkeeper/apache-bookkeeper-monitoring-api/) — Health checks and metrics endpoints.
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Apache BookKeeper Admin API
-The Apache BookKeeper HTTP Admin API provides REST endpoints for managing and monitoring BookKeeper clusters, bookies, ledgers, and auto-recovery operations. It enables programmatic cluster administration, ledger inspection, bookie health monitoring, and garbage collection management.
+#### Agentic access (1)
 
-**Human URL:** [https://bookkeeper.apache.org/docs/admin/http](https://bookkeeper.apache.org/docs/admin/http)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Apache Bookkeeper Agentic Access](https://apis.io/agentic-access/apache-bookkeeper/apache-bookkeeper-agentic-access/)
 
- - Administration, Cluster Management, Monitoring
+#### JSON Schema (9)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://bookkeeper.apache.org/docs/admin/http)
-- [OpenAPI](openapi/apache-bookkeeper-admin-openapi.yaml)
-- [GettingStarted](https://bookkeeper.apache.org/docs/getting-started/installation)
+- [AuditorInfo](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-auditor-info/)
+- [BookieInfo](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-bookie-info/)
+- [BookieList](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-bookie-list/)
+- [BookieState](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-bookie-state/)
+- [ClusterInfo](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-cluster-info/)
+- [GcStatus](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-gc-status/)
+- [LedgerEntries](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-ledger-entries/)
+- [LedgerList](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-ledger-list/)
+- [LedgerMetadata](https://apis.io/schemas/apache-bookkeeper/bookkeeper-admin-ledger-metadata/)
 
-### Apache BookKeeper Java Client API
-The BookKeeper Java client API provides programmatic access for creating, writing, reading, and managing ledgers. It supports both the legacy LedgerHandle API and the newer Ledger API with explicit durability guarantees.
+#### JSON Structure (9)
 
-**Human URL:** [https://bookkeeper.apache.org/docs/api/ledger-api](https://bookkeeper.apache.org/docs/api/ledger-api)
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Bookkeeper Admin Auditor Info Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-auditor-info-structure/)
+- [Bookkeeper Admin Bookie Info Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-bookie-info-structure/)
+- [Bookkeeper Admin Bookie List Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-bookie-list-structure/)
+- [Bookkeeper Admin Bookie State Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-bookie-state-structure/)
+- [Bookkeeper Admin Cluster Info Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-cluster-info-structure/)
+- [Bookkeeper Admin Gc Status Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-gc-status-structure/)
+- [Bookkeeper Admin Ledger Entries Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-ledger-entries-structure/)
+- [Bookkeeper Admin Ledger List Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-ledger-list-structure/)
+- [Bookkeeper Admin Ledger Metadata Structure](https://apis.io/json-structure/apache-bookkeeper/bookkeeper-admin-ledger-metadata-structure/)
 
- - Java, Ledger, Storage
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://bookkeeper.apache.org/docs/api/ledger-api)
-- [APIReference](https://bookkeeper.apache.org/docs/api/javadoc/)
+- [Apache Bookkeeper Context](https://apis.io/jsonld/apache-bookkeeper/apache-bookkeeper-context/)
 
-## Common Properties
+#### Vocabulary (1)
 
-- [GitHubOrganization](https://github.com/apache)
-- [GitHubRepository](https://github.com/apache/bookkeeper)
+The provider's domain terms, defined.
+
+- [Apache Bookkeeper Vocabulary](https://apis.io/vocabularies/apache-bookkeeper/apache-bookkeeper-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Bookkeeper Admin Auditor Info Example](https://apis.io/examples/apache-bookkeeper/bookkeeper-admin-auditor-info-example/)
+- [Bookkeeper Admin Bookie Info Example](https://apis.io/examples/apache-bookkeeper/bookkeeper-admin-bookie-info-example/)
+- [Bookkeeper Admin Bookie State Example](https://apis.io/examples/apache-bookkeeper/bookkeeper-admin-bookie-state-example/)
+- [Bookkeeper Admin Cluster Info Example](https://apis.io/examples/apache-bookkeeper/bookkeeper-admin-cluster-info-example/)
+- [Bookkeeper Admin Ledger Metadata Example](https://apis.io/examples/apache-bookkeeper/bookkeeper-admin-ledger-metadata-example/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Apache BookKeeper Admin Auto Recovery API](https://apis.io/collections/apache-bookkeeper/open-apache-bookkeeper-auto-recovery-api/)
+- [Apache BookKeeper Admin Auto Recovery Bookies API](https://apis.io/collections/apache-bookkeeper/open-apache-bookkeeper-bookies-api/)
+- [Apache BookKeeper Admin Auto Recovery Configuration API](https://apis.io/collections/apache-bookkeeper/open-apache-bookkeeper-configuration-api/)
+- [Apache BookKeeper Admin Auto Recovery Ledgers API](https://apis.io/collections/apache-bookkeeper/open-apache-bookkeeper-ledgers-api/)
+- [Apache BookKeeper Admin Auto Recovery Monitoring API](https://apis.io/collections/apache-bookkeeper/open-apache-bookkeeper-monitoring-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Apache BookKeeper — jsonschema rules](https://apis.io/rules/apache-bookkeeper/apache-bookkeeper-jsonschema-spectral-rules/)
+- [Apache BookKeeper API Rules](https://apis.io/rules/apache-bookkeeper/apache-bookkeeper-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Apache Bookkeeper Domain Security](https://apis.io/security/apache-bookkeeper/apache-bookkeeper-domain-security/)
+- [Apache Bookkeeper Vulnerability Disclosure](https://apis.io/security/apache-bookkeeper/apache-bookkeeper-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Apache Bookkeeper Plans Pricing](https://apis.io/plans/apache-bookkeeper/apache-bookkeeper-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Apache Bookkeeper Rate Limits](https://apis.io/rate-limits/apache-bookkeeper/apache-bookkeeper-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Apache Bookkeeper Finops](https://apis.io/finops/apache-bookkeeper/apache-bookkeeper-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.apache.org/)
 - [Documentation](https://bookkeeper.apache.org/)
-- [GettingStarted](https://bookkeeper.apache.org/docs/getting-started/installation)
+- [Getting started](https://bookkeeper.apache.org/docs/getting-started/installation)
 - [Support](https://bookkeeper.apache.org/community/mailing-lists)
-- [TermsOfService](https://www.apache.org/licenses/)
-- [ChangeLog](https://github.com/apache/bookkeeper/releases)
+- [Changelog](https://github.com/apache/bookkeeper/releases)
+- [Terms of service](https://www.apache.org/licenses/)
+- [GitHub](https://github.com/apache)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Ledger Storage | Append-only log segments called ledgers provide the foundational storage primitive for reliable sequential data storage. |
-| Ensemble Replication | Data is written to a configurable ensemble of bookies with write quorum and ack quorum parameters for fault tolerance. |
-| Auto-Recovery | Built-in under-replication detection and automatic ledger re-replication when bookie nodes fail. |
-| HTTP Admin API | RESTful HTTP Admin API for managing ledgers, bookies, cluster configuration, and triggering recovery operations. |
-| Metrics Export | Prometheus-format metrics endpoint for monitoring bookie performance and storage utilization. |
-| Auditor Election | ZooKeeper-based leader election for the auditor role responsible for detecting under-replicated ledgers. |
-| Garbage Collection | Configurable garbage collection for reclaiming storage from deleted or expired ledger data. |
-| Journal and Ledger Storage | Separate journal and ledger storage paths optimized for sequential write throughput and random read performance. |
+**Kin Score 30.8** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 20.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 18.4 |
 
-| Name | Description |
-|------|-------------|
-| Durable Log Storage | Serve as the replicated, durable write-ahead log for Apache Pulsar topics and distributed streaming systems. |
-| Distributed Transaction Logs | Store distributed transaction log segments for systems requiring exactly-once semantics and durable commit records. |
-| Metadata Store | Persist metadata and configuration data for distributed systems requiring consistent, replicated storage. |
-| Stream Processing Storage | Provide low-latency, high-throughput sequential storage for real-time stream processing pipelines. |
-| Cluster Administration | Monitor and manage BookKeeper clusters using the HTTP Admin API for operational visibility and recovery. |
+**Agent readiness 20.4** — agent-aware
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-| Name | Description |
-|------|-------------|
-| Apache Pulsar | BookKeeper serves as the durable log storage layer for Apache Pulsar messaging topics. |
-| Apache ZooKeeper | ZooKeeper is used for bookie coordination, auditor election, and cluster metadata management. |
-| Apache Hadoop | BookKeeper can be used with Hadoop ecosystem tools for reliable log storage alongside HDFS. |
-| Prometheus | BookKeeper exports Prometheus-format metrics for cluster monitoring and alerting. |
-| Grafana | Grafana dashboards consume BookKeeper Prometheus metrics for operational visibility. |
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/apache-bookkeeper/](https://apis.io/providers/apache-bookkeeper/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Apache BookKeeper Admin API](openapi/apache-bookkeeper-admin-openapi.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Apache BookKeeper: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-9 schema files covering LedgerList, LedgerMetadata, LedgerEntries, BookieInfo, BookieList, ClusterInfo, BookieState, GcStatus, and AuditorInfo.
-
-### JSON-LD
-
-- [Apache BookKeeper Context](json-ld/apache-bookkeeper-context.jsonld)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Apache BookKeeper Admin API](capabilities/shared/bookkeeper-admin.yaml) — 10 operations for monitoring, ledger inspection, bookie management, and auto-recovery
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Apache BookKeeper Cluster Management](capabilities/bookkeeper-cluster-management.yaml) | Admin API | 6 | Cluster Administrator, Storage Engineer |
-
-## Vocabulary
-
-- [Apache BookKeeper Vocabulary](vocabulary/apache-bookkeeper-vocabulary.yaml) — Domain taxonomy mapping 7 resources, 5 actions, 1 workflow, and 2 personas for cluster management and ledger operations
-
-## Rules
-
-- [Apache BookKeeper Spectral Rules](rules/apache-bookkeeper-spectral-rules.yml) — 12 rules across 5 categories enforcing Apache BookKeeper API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** info@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/apache-bookkeeper/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
